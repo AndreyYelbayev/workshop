@@ -1,0 +1,21 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+                                                                                
+"features": [
+{ "type": "Feature", "properties": { "id": 1, "object": "park" }, "geometry": { "type": "Point", "coordinates": [ 37.526893546916099, 55.809895397327075 ] } },
+{ "type": "Feature", "properties": { "id": 2, "object": "park" }, "geometry": { "type": "Point", "coordinates": [ 37.532389012886554, 55.80144163913841 ] } },
+{ "type": "Feature", "properties": { "id": 3, "object": "park" }, "geometry": { "type": "Point", "coordinates": [ 37.545970757910283, 55.795961223135656 ] } },
+{ "type": "Feature", "properties": { "id": 4, "object": "park" }, "geometry": { "type": "Point", "coordinates": [ 37.519588306033171, 55.804813180891223 ] } },
+{ "type": "Feature", "properties": { "id": 5, "object": "problem" }, "geometry": { "type": "Point", "coordinates": [ 37.539398217474741, 55.804960798909491 ] } },
+{ "type": "Feature", "properties": { "id": 6, "object": "problem" }, "geometry": { "type": "Point", "coordinates": [ 37.547668762416329, 55.799969693968599 ] } },
+{ "type": "Feature", "properties": { "id": 7, "object": "problem" }, "geometry": { "type": "Point", "coordinates": [ 37.550250132326894, 55.798750211170187 ] } },
+{ "type": "Feature", "properties": { "id": 8, "object": "problem" }, "geometry": { "type": "Point", "coordinates": [ 37.553669776831391, 55.796290593017922 ] } },
+{ "type": "Feature", "properties": { "id": null, "object": "park" }, "geometry": { "type": "Point", "coordinates": [ 37.531960647027127, 55.804782481779007 ] } },
+{ "type": "Feature", "properties": { "id": null, "object": "problem" }, "geometry": { "type": "Point", "coordinates": [ 37.524151138941733, 55.806847266443029 ] } },
+{ "type": "Feature", "properties": { "id": null, "object": "problem" }, "geometry": { "type": "Point", "coordinates": [ 37.517397194907666, 55.809058845822541 ] } },
+{ "type": "Feature", "properties": { "id": null, "object": "problem" }, "geometry": { "type": "Point", "coordinates": [ 37.570952340592953, 55.798765764035174 ] } },
+{ "type": "Feature", "properties": { "id": null, "object": "problem" }, "geometry": { "type": "Point", "coordinates": [ 37.578185224826811, 55.801579707610209 ] } },
+{ "type": "Feature", "properties": { "id": null, "object": "park" }, "geometry": { "type": "Point", "coordinates": [ 37.581114782614456, 55.796669866335307 ] } }
+]
+}

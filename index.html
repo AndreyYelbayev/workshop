@@ -1,15 +1,122 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title>Hello world</title>
-  Hey, mate!
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="1265.21">
-  <style type="text/css">
+  <meta charset=utf-8 />
+  <title>Aeroport</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <script src='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.js'></script>
+  <link href='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet' />
+  <style>
+  body { margin:0; padding:0; }
+
+  #map { position:absolute; top:0; bottom:0; width:100%; }
   </style>
 </head>
 <body>
+  <div id='map'></div>
+
+  <script>
+  L.mapbox.accessToken = 'pk.eyJ1IjoieWVsYmF5ZXYiLCJhIjoiTjVaVzdGTSJ9.Irna4tIh9ElYJQvNgJA_-g';
+
+  // Construct a bounding box for this map that the user cannot
+  // move out of
+  var southWest = L.latLng(55.774642,37.488098),
+    northEast = L.latLng(55.82848,37.615814),
+    bounds = L.latLngBounds(southWest, northEast);
+
+
+  var map = L.mapbox.map
+  ('map','mapbox.streets', {
+    maxZoom: 17,
+    minZoom:14,
+    maxBounds: bounds
+  }).setView([55.80,37.55], 15);
+
+
+
+  var featureLayer_1 = L.mapbox.featureLayer()
+  .loadURL('../data/bicycle.geojson')
+  //добавляем событие, которое обрабатываем по загрузке файла
+  .on('ready', function(e) {
+    //выдёргиваем из загруженного объекта geoJson-объект
+    var source = e.target.getGeoJSON();
+    console.log(source);
+
+    //чтобы применить стиль, можно указать в geoJson данных стили
+    source.features.forEach(function(feature) {
+      feature.properties['marker-color'] = '#00ddaa';
+      feature.properties['marker-symbol'] = 'bicycle';
+    });
+
+    //объект который отлично работает с geoJson
+    L.geoJson(source, {
+      pointToLayer: L.mapbox.marker.style, //эта функция для того, чтобы распознать стили в данных
+      //с каждым отдельным объектом в загруженных данных можно что-нибудь сделать
+      onEachFeature: function(feature,layer) {
+        //например, добавить popup
+        layer.bindPopup('Это — ' + feature.properties.amenity )
+      },
+      //функция style пригодится если будете указывать стили для полигонов/линий
+      //style: function(feature) { return feature.properties; }
+
+    })
+    .on('click', function(e) {
+      console.log(e); //показывает свойства объекта на который кликнули
+    })
+    .addTo(map);
+  });
+
+  var featureLayer_2 = L.mapbox.featureLayer()
+  .loadURL('../data/problems.geojson')
+
+  //добавляем событие, которое обрабатываем по загрузке файла
+  .on('ready', function(q) {
+    //выдёргиваем из загруженного объекта geoJson-объект
+    var source = q.target.getGeoJSON();
+
+    console.log(source);
+
+    //чтобы применить стиль, можно указать в geoJson данных стили
+    source.features.forEach(function(feature) {
+      if(feature.properties.object == "park") {
+        feature.properties['marker-color'] = '#ff7800';
+        feature.properties['marker-symbol'] = 'cross';
+      } else {
+        feature.properties['marker-color'] = '#ff0066';
+        feature.properties['marker-symbol'] = 'bicycle';
+      }
+
+    });
+
+    //объект который отлично работает с geoJson
+    L.geoJson(source, {
+
+      pointToLayer: L.mapbox.marker.style, //эта функция для того, чтобы распознать стили в данных
+
+      //данные можно сразу зафильтровать по какому-нибудь признаку
+      //filter: function(feature) {
+      //return (feature.properties.object > 10);
+      //},
+
+      //с каждым отдельным объектом в загруженных данных можно что-нибудь сделать
+      onEachFeature: function(feature,layer) {
+        //например, добавить popup
+        layer.bindPopup('Это — ' + feature.properties.object)
+      },
+      //функция style пригодится если будете указывать стили для полигонов/линий
+      //style: function(feature) { return feature.properties; }
+    })
+    .on('click', function(q) {
+      console.log(q); //показывает свойства объекта на который кликнули
+    })
+    .addTo(map);
+  });
+
+
+  //привинчиваем стиль из мапбокс студии
+  L.mapbox.styleLayer('mapbox://styles/yelbayev/cim9rj961007xbkkogytv49co').addTo(map);
+
+
+  </script>
 </body>
 </html>
